@@ -40,6 +40,7 @@
       `);
 
       function logout() {
+	      console.log('logged out');
       	AuthService.deleteJWT();
       }
 
@@ -53,7 +54,7 @@
             },
           });
           AuthService.setJWT(res.data.login.jwt);
-          console.log(res);
+          console.log('logged', res);
         } catch (e) {
           console.error(e);
         }

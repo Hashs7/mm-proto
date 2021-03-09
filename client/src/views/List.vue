@@ -1,6 +1,7 @@
 <template>
   <div class="list">
     <h2>Tous les instruments</h2>
+    <span v-if="error">{{ error }}</span>
     <div v-for="(ins, i) in instruments" :key="i">
       <h3>{{ ins.name }}</h3>
     </div>
@@ -20,7 +21,7 @@ export default {
   name: 'List',
   setup() {
     const ownInstruments = ref([]);
-    const { result } = useQuery(gql`
+    const { result, error } = useQuery(gql`
       query getInstruments {
         instruments {
           id,
@@ -29,9 +30,10 @@ export default {
       }
     `);
     const instruments = useResult(result);
-
+	  console.log(error);
     return {
       instruments,
+	    error,
       ownInstruments,
     }
   }

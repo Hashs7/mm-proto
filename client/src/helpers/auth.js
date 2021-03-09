@@ -19,11 +19,13 @@ class AuthService {
   	return new ApolloLink((operation, forward) => {
 			// add the authorization to the headers
 			const token = this.getJWT();
-			operation.setContext({
-				headers: {
-					authorization: token ? `Bearer ${token}` : null
-				}
-			});
+		  if (token) {
+			  operation.setContext({
+				  headers: {
+					  authorization: `Bearer ${token}`
+				  }
+			  })
+		  }
 
 			return forward(operation)
 		})

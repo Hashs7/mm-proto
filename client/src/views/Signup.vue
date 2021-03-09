@@ -53,7 +53,7 @@
               password: password.value,
             },
           });
-          console.log(res);
+          console.log('signed up', res);
           AuthService.setJWT(res.data.register.jwt);
         } catch (e) {
           console.error(e);
