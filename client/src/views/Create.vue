@@ -1,5 +1,5 @@
 <template>
-  <div class="about">
+  <div class="create">
     <h1>Create new instrument</h1>
     <form @submit="submit" >
       <div class="form__group">
@@ -25,6 +25,7 @@
   import gql from 'graphql-tag'
 
   export default {
+    name: 'Create',
     setup() {
       const name = ref('');
       const type = ref('');
@@ -40,7 +41,7 @@
           }
         }
       `);
-      
+
       async function submit(e) {
         e.preventDefault();
         try {
