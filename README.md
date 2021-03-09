@@ -1,3 +1,14 @@
-# Strapi application
+# Proto Memory Motel
 
-A quick description of your strapi application
+
+Install Strapi CMS
+```
+yarn install
+```
+
+
+Start dev server
+```
+yarn run develop
+```
+
