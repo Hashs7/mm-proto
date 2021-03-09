@@ -1,13 +1,13 @@
 <template>
   <div class="home">
-    <div v-for="(ins, i) in result.instruments" :key="i">
+    <div v-for="(ins, i) in instruments" :key="i">
       <h2>{{ ins.name }}</h2>
     </div>
   </div>
 </template>
 
 <script>
-import { useQuery } from '@vue/apollo-composable'
+import { useQuery, useResult } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
 
 export default {
@@ -21,9 +21,10 @@ export default {
         }
       }
     `);
+    const instruments = useResult(result);
 
     return {
-      result
+      instruments
     }
   }
 }
