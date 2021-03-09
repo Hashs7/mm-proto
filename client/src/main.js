@@ -1,11 +1,19 @@
 import { createApp } from 'vue'
 import { ApolloClient, createHttpLink, InMemoryCache } from '@apollo/client/core'
 import { DefaultApolloClient } from '@vue/apollo-composable'
+// import SocketIO from 'socket.io-client'
+// import VueSocketIO from 'vue-socket.io'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
-import AuthService, { authMiddleware } from './helpers/auth';
+import AuthService from './helpers/auth';
 import store from './store'
+/*
+const vueSocket = new VueSocketIO({
+	debug: true,
+	connection: SocketIO('http://localhost:1337')
+});
+*/
 
 // HTTP connection to the API
 const httpLink = createHttpLink({
@@ -27,4 +35,5 @@ createApp(App)
   .provide(DefaultApolloClient, apolloClient)
   .use(store)
   .use(router)
-  .mount('#app');
+	// .use(vueSocket)
+	.mount('#app');

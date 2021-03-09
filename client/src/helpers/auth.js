@@ -1,52 +1,35 @@
 import { ApolloLink } from "@apollo/client";
 
 class AuthService {
-  constructor() {}
+	constructor() {}
 
-  getJWT() {
-    return JSON.parse(localStorage.getItem('jwt'));
-  }
+	getJWT() {
+		return JSON.parse(localStorage.getItem('jwt'));
+	}
 
-  setJWT(token) {
-    localStorage.setItem('jwt', JSON.stringify(token));
-  }
+	setJWT(token) {
+		localStorage.setItem('jwt', JSON.stringify(token));
+	}
 
-  deleteJWT() {
-	  localStorage.removeItem('jwt');
-  }
+	deleteJWT() {
+		localStorage.removeItem('jwt');
+	}
 
 	authMiddleware() {
-  	return new ApolloLink((operation, forward) => {
+		return new ApolloLink((operation, forward) => {
 			// add the authorization to the headers
 			const token = this.getJWT();
-		  if (token) {
-			  operation.setContext({
-				  headers: {
-					  authorization: `Bearer ${token}`
-				  }
-			  })
-		  }
+			if (token) {
+				operation.setContext({
+					headers: {
+						authorization: `Bearer ${token}`
+					}
+				})
+			}
 
 			return forward(operation)
 		})
 	}
 }
 
-const instance = new AuthService();
-
-export const authMiddleware = new ApolloLink((operation, forward) => {
-	// add the authorization to the headers
-	const token = instance.getJWT();
-	console.log(token, token ? `Bearer ${token}` : null);
-	if (token) {
-		operation.setContext({
-			headers: {
-				authorization: `Bearer ${token}`
-			}
-		})
-	}
-
-	return forward(operation)
-});
-
-export default instance;
+export default new AuthService();
