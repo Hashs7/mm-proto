@@ -23,6 +23,7 @@
   import { ref } from 'vue';
   import { useMutation } from '@vue/apollo-composable';
   import gql from 'graphql-tag'
+  import AuthService from '@/helpers/auth';
 
   export default {
     name: 'Create',
@@ -53,6 +54,7 @@
             },
           });
           console.log(res);
+          AuthService.setJWT(res.data.register.jwt);
         } catch (e) {
           console.error(e);
         }

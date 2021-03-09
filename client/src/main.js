@@ -4,6 +4,7 @@ import { DefaultApolloClient } from '@vue/apollo-composable'
 import App from './App.vue'
 import './registerServiceWorker'
 import router from './router'
+import { authMiddleware } from './helpers/auth';
 import store from './store'
 
 // HTTP connection to the API
@@ -17,7 +18,8 @@ const cache = new InMemoryCache();
 
 // Create the apollo client
 const apolloClient = new ApolloClient({
-  link: httpLink,
+	// link: httpLink,
+	link: authMiddleware.concat(httpLink),
   cache,
 });
 

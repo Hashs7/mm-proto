@@ -12,6 +12,7 @@
       </div>
       <button type="submit">Log in</button>
     </form>
+    <button type="submit" @click="logout">Log out</button>
   </div>
 </template>
 
@@ -19,6 +20,7 @@
   import { ref } from 'vue';
   import { useMutation } from '@vue/apollo-composable';
   import gql from 'graphql-tag'
+  import AuthService from '@/helpers/auth';
 
   export default {
     name: 'Create',
@@ -37,6 +39,10 @@
         }
       `);
 
+      function logout() {
+      	AuthService.deleteJWT();
+      }
+
       async function submit(e) {
         e.preventDefault();
         try {
@@ -46,6 +52,7 @@
               password: password.value,
             },
           });
+          AuthService.setJWT(res.data.login.jwt);
           console.log(res);
         } catch (e) {
           console.error(e);
@@ -56,6 +63,7 @@
         email,
         password,
         submit,
+	      logout,
       }
     }
   }
