@@ -20,9 +20,10 @@
 </template>
 
 <script>
-  import { ref } from 'vue';
+  import { ref, computed } from 'vue';
   import { useMutation } from '@vue/apollo-composable';
   import gql from 'graphql-tag'
+  import { useStore } from "vuex";
 
   export default {
     name: 'Create',
@@ -30,6 +31,9 @@
       const name = ref('');
       const type = ref('');
       const model = ref('');
+
+	    const { state } = useStore();
+	    const user = computed(() => state.user);
 
       const { mutate: createInstrument } = useMutation(gql`
         mutation createInstrument($input: createInstrumentInput) {
@@ -51,6 +55,7 @@
                 name: name.value,
                 type: type.value,
                 model: model.value,
+                user: user.value.id,
               }
             },
           });

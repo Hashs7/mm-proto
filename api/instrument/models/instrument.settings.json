@@ -22,6 +22,11 @@
     },
     "model": {
       "type": "string"
+    },
+    "user": {
+      "via": "instruments",
+      "plugin": "users-permissions",
+      "model": "user"
     }
   }
 }

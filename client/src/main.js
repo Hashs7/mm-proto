@@ -31,9 +31,13 @@ const apolloClient = new ApolloClient({
   cache,
 });
 
-createApp(App)
+const app = createApp(App)
   .provide(DefaultApolloClient, apolloClient)
   .use(store)
   .use(router)
 	// .use(vueSocket)
 	.mount('#app');
+
+store.$app = app;
+store.$apollo = apolloClient;
+store.dispatch('initStore');

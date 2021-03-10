@@ -5,25 +5,15 @@
 </template>
 
 <script>
-  import { ref, inject } from 'vue';
-  import { useResult, useQuery } from "@vue/apollo-composable";
-  import gql from "graphql-tag";
+  import { computed } from "vue";
+  import { useStore } from "vuex";
 
   export default {
     name: "Header",
     setup() {
-      const socket = inject('socket');
-      console.log(socket)
-      const { result } = useQuery(gql`
-          query getUser {
-            me {
-              id,
-              username,
-            }
-          }
-        `);
-      const user = useResult(result);
-      const isAuth = ref(!user.value);
+      const { state } = useStore();
+      const user = computed(() => state.user);
+      const isAuth = computed(() => state.isAuth);
 
       return {
         isAuth,
@@ -32,7 +22,3 @@
     }
   }
 </script>
-
-<style scoped>
-
-</style>
