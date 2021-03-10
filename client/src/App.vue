@@ -5,6 +5,8 @@
     |
     <router-link to="/create">Create</router-link>
     |
+    <router-link to="/chat">Chat</router-link>
+    |
     <router-link to="/register">Sign up</router-link>
     |
     <router-link to="/login">Log in</router-link>
