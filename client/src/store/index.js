@@ -12,6 +12,7 @@ export default createStore({
 	  },
   	setUser(state, value) {
 		  state.user = value;
+		  console.log(value, 'setuser');
 	  }
   },
   actions: {
@@ -34,7 +35,7 @@ export default createStore({
           }
 			  `
 		  });
-			commit('setIsAuth', !data.me);
+			commit('setIsAuth', !!data.me);
 			commit('setUser', data.me);
 	  }
   },

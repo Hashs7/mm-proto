@@ -14,6 +14,7 @@
       const { state } = useStore();
       const user = computed(() => state.user);
       const isAuth = computed(() => state.isAuth);
+	    console.log(user.value);
 
       return {
         isAuth,

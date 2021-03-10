@@ -18,7 +18,7 @@
     "vue": "^3.0.7",
     "vue-apollo": "^3.0.7",
     "vue-router": "^4.0.0-0",
-    "vue-socket.io": "^3.0.10",
+    "vue-socket.io": "https://github.com/Hashs7/Vue-Socket.io",
     "vuex": "^4.0.0-0"
   },
   "devDependencies": {

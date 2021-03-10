@@ -49,7 +49,6 @@ export default {
 	  }));
 	  const userInstruments = useResult(userInst.result);
 
-	  console.log(!!user.value, user.value);
     return {
       instruments,
 	    error,
