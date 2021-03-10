@@ -6,22 +6,24 @@
       <h3>{{ ins.name }}</h3>
     </div>
     <h2>Mes instruments</h2>
-    <div v-for="(ins, i) in ownInstruments" :key="i">
+    <div v-for="(ins, i) in userInstruments?.instruments" :key="i">
       <h3>{{ ins.name }}</h3>
     </div>
   </div>
 </template>
 
 <script>
-import { ref } from 'vue';
+import { computed } from 'vue';
 import { useQuery, useResult } from '@vue/apollo-composable'
 import gql from 'graphql-tag'
+import { useStore } from "vuex";
 
 export default {
   name: 'List',
   setup() {
-    const ownInstruments = ref([]);
-    const { result, error } = useQuery(gql`
+  	const { state } = useStore();
+  	const user = computed(() => state.user);
+	  const { result, error } = useQuery(gql`
       query getInstruments {
         instruments {
           id,
@@ -30,11 +32,28 @@ export default {
       }
     `);
     const instruments = useResult(result);
-	  console.log(error);
+
+	  const userInst = useQuery(gql`
+      query getUserInstrument($id: ID!) {
+        user(id: $id) {
+            instruments {
+                id,
+                name,
+            }
+        }
+      }
+    `, () => ({
+		  id: user.value?.id,
+	  }), () => ({
+		  enabled: !!user.value,
+	  }));
+	  const userInstruments = useResult(userInst.result);
+
+	  console.log(!!user.value, user.value);
     return {
       instruments,
 	    error,
-      ownInstruments,
+	    userInstruments,
     }
   }
 }

@@ -55,6 +55,7 @@
                 name: name.value,
                 type: type.value,
                 model: model.value,
+                createdAt: Date.now(),
                 user: user.value.id,
               }
             },
