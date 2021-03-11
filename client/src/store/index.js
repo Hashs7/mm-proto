@@ -5,6 +5,7 @@ export default createStore({
   state: {
   	isAuth: false,
   	user: null,
+  	chatUserId: null,
   },
   mutations: {
   	setIsAuth(state, value) {
@@ -12,7 +13,9 @@ export default createStore({
 	  },
   	setUser(state, value) {
 		  state.user = value;
-		  console.log(value, 'setuser');
+	  },
+  	setChatUserId(state, value) {
+		  state.chatUserId = value;
 	  }
   },
   actions: {

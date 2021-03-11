@@ -12,11 +12,11 @@ import store from './store'
 const vueSocket = new VueSocketIO({
 	debug: true,
 	connection: SocketIO('http://localhost:1337'),
-	vuex: {
+	/*vuex: {
 		store,
 		actionPrefix: 'SOCKET_',
 		mutationPrefix: 'SOCKET_',
-	},
+	},*/
 });
 
 // HTTP connection to the API

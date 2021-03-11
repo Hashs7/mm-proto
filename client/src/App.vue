@@ -1,5 +1,5 @@
 <template>
-<!--  <Header />-->
+  <Header />
   <div id="nav">
     <router-link to="/">List</router-link>
     |

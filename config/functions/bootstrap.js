@@ -11,19 +11,20 @@
  */
 const {
 	findUser,
+	userExists,
 	createUser
 } = require('./utils/database');
 
 module.exports = () => {
 	const io = require('socket.io')(strapi.server, {
 		cors: {
-			origin: "http://localhost:3000",
+			origin: "http://localhost:8080",
 			methods: ["GET", "POST"],
 			allowedHeaders: ["my-custom-header"],
 			credentials: true
 		}
 	});
-	io.on('connection', function(socket) {
+	io.on('connection', (socket) => {
 		socket.on('join', async({ username, room }, callback) => {
 			try {
 				const userExists = await findUser(username, room);
@@ -54,10 +55,33 @@ module.exports = () => {
 						callback(`user could not be created. Try again!`)
 					}
 				}
-				callback();
+				// callback();
 			} catch(err) {
 				console.log("Err occured, Try again!", err);
 			}
-		})
+		});
+
+		socket.on('sendMessage', async(data, callback) => {
+			console.log(data);
+			try {
+				const user = await userExists(data.userId);
+				console.log();
+				if(user) {
+					console.log('emit', data.text);
+					// io.to(user.room).emit('message', {
+
+					socket.broadcast.to(user.room).emit('message', {
+						user: user.username,
+						text: data.text,
+					});
+				} else {
+					callback(`User doesn't exist in the database. Rejoin the chat`)
+				}
+				// callback();
+			} catch(err) {
+				console.log("err inside catch block", err);
+			}
+		});
+
 	});
 };

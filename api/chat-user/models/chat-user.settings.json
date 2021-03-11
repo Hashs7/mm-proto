@@ -1,0 +1,27 @@
+{
+  "kind": "collectionType",
+  "collectionName": "chat_users",
+  "info": {
+    "name": "ChatUser",
+    "description": ""
+  },
+  "options": {
+    "increments": true,
+    "timestamps": true,
+    "draftAndPublish": true
+  },
+  "attributes": {
+    "username": {
+      "type": "string"
+    },
+    "status": {
+      "type": "string"
+    },
+    "room": {
+      "type": "string"
+    },
+    "socketId": {
+      "type": "string"
+    }
+  }
+}

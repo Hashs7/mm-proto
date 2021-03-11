@@ -48,6 +48,7 @@
 
       async function submit(e) {
         e.preventDefault();
+        const createdAt = new Date(Date.now()).toISOString().slice(0, 10);
         try {
           const res = await createInstrument({
             input: {
@@ -55,7 +56,7 @@
                 name: name.value,
                 type: type.value,
                 model: model.value,
-                createdAt: Date.now(),
+                createdAt,
                 user: user.value.id,
               }
             },

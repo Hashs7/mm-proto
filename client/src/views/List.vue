@@ -27,7 +27,8 @@ export default {
       query getInstruments {
         instruments {
           id,
-          name
+          name,
+          createdAt
         }
       }
     `);
@@ -36,10 +37,10 @@ export default {
 	  const userInst = useQuery(gql`
       query getUserInstrument($id: ID!) {
         user(id: $id) {
-            instruments {
-                id,
-                name,
-            }
+          instruments {
+            id,
+            name,
+          }
         }
       }
     `, () => ({
